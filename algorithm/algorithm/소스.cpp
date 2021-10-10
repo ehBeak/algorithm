@@ -4,38 +4,33 @@ using namespace std;
 
 int main() {
 
-	/// <summary>
-	/// int n, m, i, sum = 0;
-	/// 
-	/// cin >> n >> m;
-	/// 
-	/// sum += i; 누적
-	/// 
-	/// cout<<sum;
-	/// 
-	/// </summary>
-	/// <returns></returns>
+	/* cin >> a, cin >> b */
+	// 자연수의 합
+	// 변수
+	int a, b;
+	int sum = 0;
 
-	int n; // n까지
-	int m; // m의 배수만
+	cin >> a >> b;
 
-	int sum = 0; // 배수합
+	for (int i = a; i <= b; i++) {
 
-	// 입력
-	cin >> n;
-	cin >> m;
-
-	for (int i = 1; i < n + 1; i++) {
-
-		// m의 배수인지 확인
-		if (i % m == 0) {
-			// m의 배수면 더하기
-			sum += i; 
+		if (i != b) {
+			cout << i << " + ";
 		}
+		else {
+			cout << i << " = ";
+		}
+		sum += i;
 
 	}
+	cout << sum;
 
-	// 출력
-	cout << sum << endl;
+	/*
+	#### 풀이 ####
+	1. a,b,i,sum을 미리 선언
+	2. for문에는 +만, sum더하기
+	3. 맨 마지막에는 i = 을 출력하고 sum+i출력
+	*/
+
 	return 0;
 }
