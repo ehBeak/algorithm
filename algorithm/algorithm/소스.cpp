@@ -1,60 +1,49 @@
-#include<iostream> // <stdio.h>
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
 #include<fstream>
-#include<string>
 
 
 using namespace std;
 
 int main() {
 
-	 // "" : string, '':char
-	/*
-	* 입력 주민등록 번호
-	* 출력 주인의 나이, 성별 판단
-	*/
-	// N명의 나이중에 가장 나이차이 많이 나는 경우
 
 	// 파일 입력
 	/*ios_base::sync_with_stdio(false);
 	ifstream cin;
 	cin.open("input.txt");*/
+
 	// 변수
-	string no, first; // char a[20] string보다는 char 배열로
-	char second;
-	int age;
+	char str[100]; // 문자열 저장
+	int num = 0; // 숫자 저장
+	//int digit = 1;
+	int count = 0;
+
 	// 입력
-	cin >> no; // scanf("%s", &a) // string으로 a의 참조값 읽음
+	scanf("%s", &str);
 
-	second = no[7]; // 1900, 2000 구분
+	for (int i = 0; str[i] != '\0'; i++) {
+		if ((str[i] >= 48) && (str[i] <= 57)) {
+			num = num * 10 + (str[i] - 48);
+		}
+	}
+	/*for (int i = 20; i > 0; i--) {
+		if (str[i] >= 48 && str[i] <= 57) {
+			num += digit * (str[i] - 48);
+			digit *= 10;
+		}
+	}*/
+
 	
-	if ((second == '1') || (second == '2')) { // 1900
-		first = "19";
-		// year = 1900 + ( (a[0]-48) * 10 + (a[1]-48)*1) // 48빼야지 정수형!!!
-	}
-	else if ((second == '3') || (second == '4')) { // 2000
-		first = "20";
+	for (int i = 1; i <= num; i++) {
+		if (num % i == 0) {
+			count++;
+		}
 	}
 
-	for (int i = 0; i < 2; i++) {
-		first = first + no[i];
-	}
-	
-	age = stoi(first);
-	age = 2019 - age + 1;
+	// 출력
+	printf("%d\n", num);
+	printf("%d", count);
 
-	// printf("%d", age)
-
-	if ((second == '1') || (second == '3')) {
-		cout << age << " M" << endl;
-		
-	}
-	else if ((second == '2') || (second == '4')) {
-		cout << age << " W" << endl;
-	}
-
-	/*
-	* 
-	*/
-	
 	return 0;
 }
