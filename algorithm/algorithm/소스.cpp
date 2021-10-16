@@ -14,36 +14,20 @@ int main() {
 	cin.open("input.txt");*/
 
 	// 변수
-	char str[100]; // 문자열 저장
-	int num = 0; // 숫자 저장
-	//int digit = 1;
-	int count = 0;
+	char a[101], b[101];
+	int pos = 0;
 
-	// 입력
-	scanf("%s", &str);
+	gets_s(a);
 
-	for (int i = 0; str[i] != '\0'; i++) {
-		if ((str[i] >= 48) && (str[i] <= 57)) {
-			num = num * 10 + (str[i] - 48);
+	for (int i = 0; a[i] != '\0'; i++) {
+		if (a[i] >= 65 && a[i] <= 90) {
+			b[pos++] = a[i] + 32;
+		} else if (a[i] >= 97 && a[i] <= 122) {
+			b[pos++] = a[i];
 		}
 	}
-	/*for (int i = 20; i > 0; i--) {
-		if (str[i] >= 48 && str[i] <= 57) {
-			num += digit * (str[i] - 48);
-			digit *= 10;
-		}
-	}*/
-
-	
-	for (int i = 1; i <= num; i++) {
-		if (num % i == 0) {
-			count++;
-		}
-	}
-
-	// 출력
-	printf("%d\n", num);
-	printf("%d", count);
+	b[pos] = '\0';
+	printf("%s", b);
 
 	return 0;
 }
