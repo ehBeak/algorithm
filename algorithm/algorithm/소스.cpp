@@ -14,20 +14,24 @@ int main() {
 	cin.open("input.txt");*/
 
 	// º¯¼ö
-	char a[101], b[101];
-	int pos = 0;
+	char a[31];
+	int cnt = 0;
 
-	gets_s(a);
+	scanf("%s", &a);
 
 	for (int i = 0; a[i] != '\0'; i++) {
-		if (a[i] >= 65 && a[i] <= 90) {
-			b[pos++] = a[i] + 32;
-		} else if (a[i] >= 97 && a[i] <= 122) {
-			b[pos++] = a[i];
+		if (a[i] == '(') {
+			cnt++;
 		}
+		else if (a[i] == ')') {
+			cnt--;
+		}
+
+		if (cnt < 0) break;
 	}
-	b[pos] = '\0';
-	printf("%s", b);
+	
+	if (cnt != 0) printf("NO");
+	else printf("YES");
 
 	return 0;
 }
