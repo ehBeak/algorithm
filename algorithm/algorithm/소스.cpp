@@ -5,6 +5,27 @@
 
 using namespace std;
 
+int digit_sum(int x) {
+	/*int digit = 10000000;
+	int sum = 0;
+	for (int i = digit; i != 0; i = i / 10) {
+		sum += (x / i);
+		if (sum != 0) {
+			x = x % i;
+		}
+	}*/
+
+	int tmp, sum = 0;
+
+	while (x > 0) {
+		tmp = x % 10;
+		sum += tmp;
+		x / 10;
+	}
+	
+	return sum;
+}
+
 int main() {
 
 	// 파일 입력
@@ -12,20 +33,28 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int a;
-	int cnt[50001] = { 0, };
+	int a, b, sum;
+	int max_sum = 0;
+	int max_num = 0;
 
 	scanf("%d", &a);
 
+	for (int i = 0; i < a; i++) {
+		scanf("%d", &b);
 
-	for (int i = 1; i <= a; i++) {
-		for (int j = i; j <= a; j = j + i) {
-			cnt[j]++;
+		//printf("%d \n",digit_sum(b));
+		sum = digit_sum(b);
+
+		if (max_sum == sum) {
+			if (max_num < b) max_num = b;
+		}
+		else if (max_sum < sum) {
+			max_sum = sum;
+			max_num = b;
 		}
 	}
 
-	for (int i = 1; i <= a; i++) {
-		printf("%d ", cnt[i]);
-	}
+	printf("%d", max_num);
+
 	return 0;
 }
