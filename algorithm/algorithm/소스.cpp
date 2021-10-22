@@ -5,26 +5,6 @@
 
 using namespace std;
 
-int digit_sum(int x) {
-	/*int digit = 10000000;
-	int sum = 0;
-	for (int i = digit; i != 0; i = i / 10) {
-		sum += (x / i);
-		if (sum != 0) {
-			x = x % i;
-		}
-	}*/
-
-	int tmp, sum = 0;
-
-	while (x > 0) {
-		tmp = x % 10;
-		sum += tmp;
-		x / 10;
-	}
-	
-	return sum;
-}
 
 int main() {
 
@@ -33,28 +13,19 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int a, b, sum;
-	int max_sum = 0;
-	int max_num = 0;
+	int n, b = 1, res = 0;
 
-	scanf("%d", &a);
+	scanf("%d", &n);
 
-	for (int i = 0; i < a; i++) {
-		scanf("%d", &b);
+	// abcd
+	//(abcd) + (abcd - (9)) + (abcd - 99) + (abcd - 999);
 
-		//printf("%d \n",digit_sum(b));
-		sum = digit_sum(b);
-
-		if (max_sum == sum) {
-			if (max_num < b) max_num = b;
-		}
-		else if (max_sum < sum) {
-			max_sum = sum;
-			max_num = b;
-		}
+	while (n / b != 0) {
+		res += (n - (b - 1));
+		b *= 10;
 	}
 
-	printf("%d", max_num);
+	printf("%d", res);
 
 	return 0;
 }
