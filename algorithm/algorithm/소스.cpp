@@ -5,6 +5,44 @@
 
 using namespace std;
 
+int reverse(int x) { // 32 -> 23
+	int b = 0, digit = 1;
+
+	char a[100001];
+
+	//32
+	for (int i = 0; x != 0; i++) {
+		a[i] = x % 10;
+		x = x / 10;
+		digit *= 10; 
+	}
+
+
+	for (int i = 0; digit != 0; i++) {
+		digit /= 10;
+		b += (a[i]) * digit;
+	}
+
+	//int tmp;
+
+	//1234
+	//while (x > 0) {
+	//	tmp = x % 10; // 4 3
+	//	b = b * 10 + tmp; // 4 43 
+	//	x /= 10; // 123
+
+	//}
+
+	return b;
+}
+
+bool isPrime(int x) {
+	if (x == 1) return false;
+	for (int i = 2; i < (x / 2) ; i++) {
+		if (x % i == 0) return false;
+	}
+	return true;
+}
 
 int main() {
 
@@ -13,32 +51,28 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	char a[101];
-	int b[10] = { 0, };
-	int maxCount = 0, maxNum = 0;
+	int n;
+	int a[101];
 
-	gets_s(a);
+	scanf("%d", &n);
 
-
-
-	for (int i = 0; a[i] != '\0'; i++) {
-		b[(a[i] - 48)]++;
+	for (int i = 0; i < n; i++) { // ют╥б ok
+		scanf("%d", &a[i]);
+	}
+	
+	for (int i = 0; i < n; i++) {
+		a[i] = reverse(a[i]);
 	}
 
-	/*for (int i = 0; i<10; i++) {
-		printf("\n%d", b[i]);
-	}*/
-
-	for (int i = 0; i < 10; i++) {
-		if (maxCount <= b[i]) {
-			maxNum = i;
-			maxCount = b[i];
-		}else if (maxCount == b[i]) {
-			if (maxNum < i) maxNum = i;
-		}
+	for (int i = 0; i < n; i++) {
+		if (isPrime(a[i]) == true) printf("%d ", a[i]);
 	}
+	
 
-	printf("%d", maxNum);
+	
+
+
+	
 
 	return 0;
 }
