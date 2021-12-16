@@ -2,9 +2,9 @@
 #include<stdio.h>
 //#include<fstream>
 
-
 using namespace std;
 
+// 16. Anagram(아나그램 : 구글 인터뷰 문제)
 int main() {
 
 	// 파일 입력
@@ -12,25 +12,23 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int n, cnt = 0;
+	int num;
+	int q[10], res[10], real_res[10];
 
-	scanf("%d", &n);
-	cnt = n - 1;
+	scanf("%d", &num);
 
-	// 20
-	for (int i = n; i > 2; i--) { 
-		for (int j = 2; j*j <= i; j++) { 
-			if (i % j == 0) {
-				cnt--;
-				break;
-			}
-		}
+	for (int i = 0; i < num; i++) {
+		scanf("%d", &q[i]);
+		scanf("%d", &res[i]);
+	}
 
-	 }
+	for (int i = 0; i < num; i++) {
+		real_res[i] = (q[i] * (q[i] + 1)) / 2;
+		if (res[i] == real_res[i]) printf("YES\n");
+		else printf("NO\n");
+	}
 
 
-	
-	printf("%d", cnt);
 
 	return 0;
 }
