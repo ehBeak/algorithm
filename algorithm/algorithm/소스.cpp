@@ -12,25 +12,44 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int cnt, res;
-	int a[100];
-	int b[100];
+	int a[10], b[10];
+	int a_score = 0, b_score = 0;
+	int res;
 
-	scanf("%d", &cnt);
-	for (int i = 0; i < cnt; i++) {
+	for (int i = 0; i < 10; i++) {
 		scanf("%d", &a[i]);
 	}
-	for (int i = 0; i < cnt; i++) {
+
+	for (int i = 0; i < 10; i++) {
 		scanf("%d", &b[i]);
-	}
 
-
-	for (int i = 0; i < cnt; i++) {
-		res = a[i] - b[i];
-		if (res == 0) printf("D\n");
-		if (res == 2 || res == -1)printf("B\n");
-		if (res == -2 || res == 1)printf("A\n");
+		if (a[i] > b[i]) {
+			a_score += 3;
+			res = 1;
+		}
+		else if (a[i] < b[i]) {
+			b_score += 3;
+			res = 2;
+		}
+		else if (a[i] == b[i]) {
+			a_score++; b_score++;
+		}
 	}
 	
+
+	printf("%d %d\n", a_score, b_score);
+
+	if (a_score == b_score) {
+		if (res == 0) printf("D");
+		else if (res == 1) printf("A");
+		else if (res == 2)printf("B");
+	}
+	
+	if (a_score > b_score) printf("A");
+	else printf("B");
+
+
+	
+
 	return 0;
 }
