@@ -12,22 +12,25 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int n, i, cnt = 0, h[101], max;
-	scanf("%d", &n);
-	for (i = 1; i <= n; i++) {
-		scanf("%d", &h[i]);
+	int cnt, res;
+	int a[100];
+	int b[100];
+
+	scanf("%d", &cnt);
+	for (int i = 0; i < cnt; i++) {
+		scanf("%d", &a[i]);
+	}
+	for (int i = 0; i < cnt; i++) {
+		scanf("%d", &b[i]);
 	}
 
-	max = h[n];
 
-	for (i = n - 1; i >= 1; i--) {
-		if (h[i] > max) {
-			max = h[i];
-			cnt++;
-		}
+	for (int i = 0; i < cnt; i++) {
+		res = a[i] - b[i];
+		if (res == 0) printf("D\n");
+		if (res == 2 || res == -1)printf("B\n");
+		if (res == -2 || res == 1)printf("A\n");
 	}
-	printf("%d\n", cnt);
-	return 0;
 	
 	return 0;
 }
