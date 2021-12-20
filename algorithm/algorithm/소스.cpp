@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// 16. Anagram(아나그램 : 구글 인터뷰 문제)
+// 18. 층간소음
 int main() {
 
 	// 파일 입력
@@ -12,23 +12,32 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int num;
-	int q[10], res[10], real_res[10];
+	int n, m, res = 1, max = -1;
+	int a[100] = { 0, };
 
-	scanf("%d", &num);
+	scanf("%d %d", &n, &m);
 
-	for (int i = 0; i < num; i++) {
-		scanf("%d", &q[i]);
-		scanf("%d", &res[i]);
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &a[i]);
 	}
 
-	for (int i = 0; i < num; i++) {
-		real_res[i] = (q[i] * (q[i] + 1)) / 2;
-		if (res[i] == real_res[i]) printf("YES\n");
-		else printf("NO\n");
+	for (int i = 0; i < n; i++) {
+
+		if (a[i] > m) {
+			
+			if (a[i + 1] > m) res++;
+			else {
+				if (max < res) {
+					max = res;
+				}
+				res = 1;
+			}
+		}
+		
 	}
 
-
+	if (max == 0)printf("%d", -1);
+	else printf("%d", max);
 
 	return 0;
 }
