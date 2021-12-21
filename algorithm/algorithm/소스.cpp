@@ -13,26 +13,24 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	
-	int n, k, tmp = 0, max = -2147483647;
-	//int a[100000] = { 0, };
+	int n, tmp = 1, res = 0;
 
-	scanf("%d %d", &n, &k);
+	scanf("%d", &n);
 	vector<int> a(n);
+
 	for (int i = 0; i < n; i++) {
 		scanf("%d", &a[i]);
 	}
 
-	for (int i = 0; i < k; i++) {
-		tmp += a[i];
+	for (int i = 0; i < n-1; i++) {
+		if (a[i] <= a[i + 1]) tmp++;
+		else {
+			if (tmp > res) res = tmp;
+			tmp = 1;
+		}
 	}
-	max = tmp;
+	if (tmp == n) res = tmp;
 
-	for (int i = k; i < n; i++) {
-		tmp = tmp + a[i] - a[i - k];
-		if (tmp > max) max = tmp;
-	}
-
-	printf("%d", max);
+	printf("%d", res);
 	return 0;
 }
