@@ -14,23 +14,20 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int n, tmp, res = 1, pre, now;
+	int n;
 	scanf("%d", &n);
-	vector<int> b(n - 1);
-	scanf("%d", &pre);
+	vector<int> a(n);
+	vector<int> b(n, 1);
 
-	for (int i = 1; i < n; i++) {
-		scanf("%d", &now);
+	for (int i = 0; i < n; i++) scanf("%d", &a[i]);
 
-		tmp = abs(pre - now);
-		pre = now;
-
-		if (tmp < n && b[tmp - 1] == 0) b[tmp - 1] = 1;
-		else {
-			printf("NO"); return 0;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (a[i] < a[j]) b[i]++;
 		}
-		pre = now;
 	}
-	printf("YES");
+
+	for (int i = 0; i < n; i++) printf("%d ", b[i]);
+
 	return 0;
 }
