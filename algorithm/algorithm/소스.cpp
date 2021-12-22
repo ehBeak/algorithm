@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<vector>
+#include<algorithm>
 //#include<fstream>
 
 using namespace std;
@@ -13,24 +14,23 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int n, tmp = 1, res = 0;
-
+	int n, tmp, res = 1, pre, now;
 	scanf("%d", &n);
-	vector<int> a(n);
+	vector<int> b(n - 1);
+	scanf("%d", &pre);
 
-	for (int i = 0; i < n; i++) {
-		scanf("%d", &a[i]);
-	}
+	for (int i = 1; i < n; i++) {
+		scanf("%d", &now);
 
-	for (int i = 0; i < n-1; i++) {
-		if (a[i] <= a[i + 1]) tmp++;
+		tmp = abs(pre - now);
+		pre = now;
+
+		if (tmp < n && b[tmp - 1] == 0) b[tmp - 1] = 1;
 		else {
-			if (tmp > res) res = tmp;
-			tmp = 1;
+			printf("NO"); return 0;
 		}
+		pre = now;
 	}
-	if (tmp == n) res = tmp;
-
-	printf("%d", res);
+	printf("YES");
 	return 0;
 }
