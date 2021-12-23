@@ -6,7 +6,6 @@
 
 using namespace std;
 
-// 18. 층간소음
 int main() {
 
 	// 파일 입력
@@ -19,11 +18,10 @@ int main() {
 	vector<int> a(n);
 	vector<int> b(n, 1);
 
-	for (int i = 0; i < n; i++) scanf("%d", &a[i]);
-
 	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			if (a[i] < a[j]) b[i]++;
+		scanf("%d", &a[i]);
+		for (int j = 0; j < i; j++) {
+			if (a[i] <= a[j]) b[i]++;
 		}
 	}
 
