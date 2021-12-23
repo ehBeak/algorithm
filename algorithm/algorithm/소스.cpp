@@ -13,19 +13,30 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int n;
+	int n, tmp, j;
 	scanf("%d", &n);
 	vector<int> a(n);
-	vector<int> b(n, 1);
+
+	for (int i = 2; i <= n; i++) {
+		tmp = i;
+		j = 2;
+		while (tmp != 1) {
+			if (tmp % j == 0) {
+				tmp = tmp / j;
+				a[j - 1]++;
+			}
+			else {
+				j++;
+			}
+		}
+		
+	}
+	printf("%d! = ", n);
 
 	for (int i = 0; i < n; i++) {
-		scanf("%d", &a[i]);
-		for (int j = 0; j < i; j++) {
-			if (a[i] <= a[j]) b[i]++;
-		}
+		if (a[i] != 0) printf("%d ", a[i]);
 	}
-
-	for (int i = 0; i < n; i++) printf("%d ", b[i]);
 
 	return 0;
 }
+
