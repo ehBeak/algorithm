@@ -13,26 +13,18 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int n, j, tmp;
+	int n, tmp, cnt = 0;
 	scanf("%d", &n);
-	vector<int> a(n);
 
-	for (int i = 2; i < n+1; i++) {
+	//1234 123
+	for (int i = 1; i < n + 1; i++) {
 		tmp = i;
-		j = 2;
 		while (tmp > 1) {
-			if (tmp % j == 0) {
-				a[j - 1]++;
-				tmp = tmp / j;
-			}else {
-				j++;
-			}
+			if (tmp % 10 == 3) cnt++;
+			tmp = tmp/10;
 		}
 	}
-	
-	if (a[1] > a[4]) printf("%d", a[4]);
-	else printf("%d", a[1]);
-
+	printf("%d", cnt);
 	return 0;
 }
 
