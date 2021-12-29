@@ -12,29 +12,35 @@ int main() {
 	/*ios_base::sync_with_stdio(false);
 	ifstream cin;
 	cin.open("input.txt");*/
-	int n, cur, lt = 1, rt, k = 1, res = 0;
-	scanf("%d", &n);
 	
-	while (lt != 0) {
-		lt = n / k / 10;
-		cur = (n / k) % 10;
-		rt = n % k;
-		
-		//printf("lt: %d, cur: %d, rt: %d\n", lt, cur, rt);
+	char a[10];
+	int c = 0, h = 0, i, pos, res;
+	gets_s(a);
 
-		if (cur == 3) res += lt * k + rt + 1;
-		else if (cur > 3) res += (lt + 1) * k;
-		else if (cur < 3) res += lt * k;
-
-		//printf("res : %d\n", res);
-
-		k *= 10;
+	//2자리 12+1 = 13
+	//3자리 - C다음 H가 바로올 때 12 + 1*b
+	//		- C다음 숫자가 올 때 12*a + 1
+	//4자리 12*a + 1*b
+	if (a[1] == 'H') {
+		c = 1;
+		pos = 1;
+	}
+	else {
+		for (i = 1; a[i] != 'H'; i++) {
+			c = c * 10 + (a[i] - 48);
+		}
+		pos = i;
 	}
 
-	printf("%d", res);
-
-	
-
+	if (a[pos + 1] == '\0') {
+		h = 1;
+	}
+	else {
+		for (i = pos + 1; a[i] != '\0'; i++) {
+			h = h * 10 + (a[i] - 48);
+		}
+	}
+	printf("%d", c * 12 + h);
 	return 0;
 }
 
