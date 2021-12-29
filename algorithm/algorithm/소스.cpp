@@ -13,34 +13,21 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 	
-	char a[10];
-	int c = 0, h = 0, i, pos, res;
-	gets_s(a);
-
-	//2자리 12+1 = 13
-	//3자리 - C다음 H가 바로올 때 12 + 1*b
-	//		- C다음 숫자가 올 때 12*a + 1
-	//4자리 12*a + 1*b
-	if (a[1] == 'H') {
-		c = 1;
-		pos = 1;
-	}
-	else {
-		for (i = 1; a[i] != 'H'; i++) {
-			c = c * 10 + (a[i] - 48);
+	int n, idx, tmp;
+	scanf("%d", &n);
+	vector<int> a(n);
+	for (int i = 0; i < n; i++) scanf("%d", &a[i]);
+	for (int i = 0; i < n-1; i++) {
+		idx = i;
+		for (int j = i; j < n; j++) {
+			if (a[j] < a[idx])idx = j;
 		}
-		pos = i;
+		tmp = a[i];
+		a[i] = a[idx];
+		a[idx] = tmp;
 	}
 
-	if (a[pos + 1] == '\0') {
-		h = 1;
-	}
-	else {
-		for (i = pos + 1; a[i] != '\0'; i++) {
-			h = h * 10 + (a[i] - 48);
-		}
-	}
-	printf("%d", c * 12 + h);
+	for (int i = 0; i < n; i++) printf("%d ", a[i]);
 	return 0;
 }
 
