@@ -13,7 +13,7 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 	
-	int n, tmp;
+	int n, tmp, j;
 	scanf("%d", &n);
 	vector<int> a(n);
 
@@ -21,18 +21,18 @@ int main() {
 		scanf("%d", &a[i]);
 	}
 
-	for (int i = 0; i < n - 1; i++) {
-		for (int j = 0; j < n - i - 1; j++) {
-			if (a[j] > 0 && a[j + 1] < 0) {
-				tmp = a[j];
-				a[j] = a[j + 1];
-				a[j + 1] = tmp;
-			}
+	// 11 7 5 6 10 9
+	// 11 11
+	for (int i = 1; i < n; i++) {
+		tmp = a[i];
+		for (j = i - 1; j >= 0; j--) {
+			if (a[j] > tmp) a[j + 1] = a[j];
+			else break;
 		}
+		a[j + 1] = tmp;
 	}
 
-	for (int i = 0; i < n; i++)
-		printf("%d ", a[i]);
+	for (int i = 0; i < n; i++)printf("%d ", a[i]);
 
 	return 0;
 }
