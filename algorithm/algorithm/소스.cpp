@@ -12,27 +12,37 @@ int main() {
 	/*ios_base::sync_with_stdio(false);
 	ifstream cin;
 	cin.open("input.txt");*/
-	
-	int n, tmp, j;
-	scanf("%d", &n);
-	vector<int> a(n);
+
+	int s, n, pos = -1, work;
+	scanf("%d %d", &s, &n);
+	vector<int> cache(s);
 
 	for (int i = 0; i < n; i++) {
-		scanf("%d", &a[i]);
-	}
+		scanf("%d", &work);
 
-	// 11 7 5 6 10 9
-	// 11 11
-	for (int i = 1; i < n; i++) {
-		tmp = a[i];
-		for (j = i - 1; j >= 0; j--) {
-			if (a[j] > tmp) a[j + 1] = a[j];
-			else break;
+		for (int j = 0; j < s; j++) {
+			if (cache[j] == work) {
+				pos = j;
+			}
 		}
-		a[j + 1] = tmp;
-	}
 
-	for (int i = 0; i < n; i++)printf("%d ", a[i]);
+		if (pos == -1) {
+			for (int j = s-2; j >= 0; j--) {
+				cache[j + 1] = cache[j];
+			}
+		}
+		else {
+			for (int j = pos - 1; j >= 0; j--) {
+				cache[j + 1] = cache[j];
+			}
+		}
+		
+		cache[0] = work;
+		pos = - 1;
+	}
+	
+
+	for (int j = 0; j < s; j++) printf("%d ", cache[j]);
 
 	return 0;
 }
