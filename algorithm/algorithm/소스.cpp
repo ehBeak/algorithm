@@ -13,36 +13,24 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int s, n, pos = -1, work;
-	scanf("%d %d", &s, &n);
-	vector<int> cache(s);
+	int n, tmp;
+	scanf("%d", &n);
+	vector<int> a(n);
+	vector<int> res(n);
 
 	for (int i = 0; i < n; i++) {
-		scanf("%d", &work);
-
-		for (int j = 0; j < s; j++) {
-			if (cache[j] == work) {
-				pos = j;
-			}
-		}
-
-		if (pos == -1) {
-			for (int j = s-2; j >= 0; j--) {
-				cache[j + 1] = cache[j];
-			}
-		}
-		else {
-			for (int j = pos - 1; j >= 0; j--) {
-				cache[j + 1] = cache[j];
-			}
-		}
-		
-		cache[0] = work;
-		pos = - 1;
+		scanf("%d", &a[i]);
 	}
-	
 
-	for (int j = 0; j < s; j++) printf("%d ", cache[j]);
+	for (int i = n - 1; i >= 0; i--) {
+		tmp = a[i];
+		for (int j = n - 1; j > tmp; j--) { 
+			res[j] = res[j-1]; 
+		}
+		res[tmp] = i + 1;
+	}
+
+	for (int i = 0; i < n; i++)printf("%d", res[i]);
 
 	return 0;
 }
