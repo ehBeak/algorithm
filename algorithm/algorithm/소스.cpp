@@ -13,24 +13,23 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int n, tmp;
+	int n, pos;
 	scanf("%d", &n);
-	vector<int> a(n);
-	vector<int> res(n);
+	vector<int> is(n);
+	vector<int> os(n);
 
 	for (int i = 0; i < n; i++) {
-		scanf("%d", &a[i]);
+		scanf("%d", &is[i]);
 	}
-
 	for (int i = n - 1; i >= 0; i--) {
-		tmp = a[i];
-		for (int j = n - 1; j > tmp; j--) { 
-			res[j] = res[j-1]; 
+		pos = i;
+		for (int j = 0; j < is[i]; j++) {
+			os[pos] = os[pos + 1];
+			pos++;
 		}
-		res[tmp] = i + 1;
+		os[pos] = i + 1;
 	}
-
-	for (int i = 0; i < n; i++)printf("%d", res[i]);
+	for (int i = 0; i < n; i++)printf("%d ", os[i]);
 
 	return 0;
 }
