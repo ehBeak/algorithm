@@ -1,2 +1,3 @@
 ﻿  소스.cpp
+D:\algorithm\algorithm\algorithm\소스.cpp(16,22): warning C4101: 'bi' :참조되지 않은 지역 변수입니다.
   algorithm.vcxproj -> D:\algorithm\algorithm\Debug\algorithm.exe

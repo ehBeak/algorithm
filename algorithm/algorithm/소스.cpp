@@ -13,48 +13,22 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int an, bn, ai = 0, bi = 0;
+	int an, bn, ai = 0, tmp;
 
 	scanf("%d", &an);
 	vector<int> a(an);
 	for (int i = 0; i < an; i++) {
 		scanf("%d", &a[i]);
 	}
-
 	scanf("%d", &bn);
-	vector<int> b(bn);
-	for (int i = 0; i < bn; i++) {
-		scanf("%d", &b[i]);
-	}
 
-
-	//(ai != an) && (bi != bn)
-	while (true) {
-		if (a[ai] < b[bi]) {
-			printf("%d ", a[ai]);
-			if (ai != an-1) ai++; 
-			else {
-				a[ai] = 101;
-			}
+	scanf("%d", &tmp);
+	for (int i = 0; i < bn + an; i++) {
+		if (ai < an && a[ai] <= tmp) printf("%d ", a[ai++]);
+		else{
+			printf("%d ", tmp);
+			if (i < bn + an - 1) scanf("%d", &tmp);
 		}
-		else {
-			printf("%d ", b[bi]);
-			if (bi != bn-1) bi++;
-			else {
-				b[bi] = 101;
-			}
-		}
-		if ((ai == an-1) && (bi == bn-1)) break;
-	}
-	
-	
-	if (b[bi] != 101 && a[ai] != 101) {
-		if (b[bi] < a[ai]) printf("%d %d", b[bi], a[ai]);
-		else printf("%d %d", a[ai], b[bi]);
-	}
-	else {
-		if (b[bi] == 101) printf("%d ", a[ai]);
-		if (a[ai] == 101) printf("%d ", b[bi]);
 	}
 	
 	return 0;
