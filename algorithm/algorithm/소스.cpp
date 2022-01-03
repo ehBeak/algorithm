@@ -13,27 +13,38 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int an, bn, ai = 0, bi = 0;
+	int n, m, idx = 0, tmp, cnt = 0, j;
 
-	scanf("%d", &an);
-	vector<int> a(an);
-	for (int i = 0; i < an; i++) {
-		scanf("%d", &a[i]);
+	scanf("%d", &n);
+	vector<int> a(n);
+	for (int i = 0; i < n; i++) scanf("%d", &a[i]);
+	
+	scanf("%d", &m);
+	vector<int> b(m);
+	for (int i = 0; i < m; i++) scanf("%d", &b[i]);
+
+	vector<int> res(m + n - 1);
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			if (a[i] == b[j]) {
+				res[cnt++] = a[i];
+				break;
+			}
+		}
 	}
 	
-	scanf("%d", &bn);
-	vector<int> b(bn);
-	for (int i = 0; i < bn; i++) {
-		scanf("%d", &b[i]);
+	for (int i = 1; i < cnt; i++) {
+		tmp = res[i];
+		for (j = i - 1; j >= 0; j--) {
+			if (tmp < res[j]) res[j + 1] = res[j];
+			else break;
+		}
+		res[j + 1] = tmp;
 	}
 
-	while (ai < an && bi < bn) {
-		if (a[ai] < b[bi]) printf("%d ", a[ai++]);
-		else printf("%d ", b[bi++]);
-	}
-
-	while (bi < bn)printf("%d ", b[bi++]);
-	while (ai < an)printf("%d ", a[ai++]);
+	for (int i = 0; i < cnt; i++) printf("%d ", res[i]);
+	
 	
 	return 0;
 }
