@@ -13,33 +13,21 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int n, m, ai = 0, bi = 0, tmp, j;
+	int n, m, ai = 0, bi = 0;
 
 	scanf("%d", &n);
 	vector<int> a(n);
 	for (int i = 0; i < n; i++) {
 		scanf("%d", &a[i]);
-		tmp = a[i];
-		for (j = i - 1; j >= 0; j--) {
-			if (tmp > a[j]) break;
-			else a[j + 1] = a[j];
-		}
-		a[j + 1] = tmp;
 	}
-
+	sort(a.begin(), a.end());
 	scanf("%d", &m);
 	vector<int> b(m);
 	for (int i = 0; i < m; i++) {
 		scanf("%d", &b[i]);
-		tmp = b[i];
-		for (j = i - 1; j >= 0; j--) {
-			if (tmp > b[j]) break;
-			else b[j + 1] = b[j];
-		}
-		b[j + 1] = tmp;
 	}
-
-	while (true) {
+	sort(b.begin(), b.end());
+	while (ai < n && bi < m) {
 		
 		if (a[ai] == b[bi]) {
 			printf("%d ", a[ai]);
@@ -52,8 +40,6 @@ int main() {
 		else if (a[ai] < b[bi]){
 			ai++;
 		}
-
-		if (ai >= n || bi >= m) break;
 
 	}
 
