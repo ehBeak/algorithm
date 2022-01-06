@@ -13,23 +13,30 @@ int main() {
 	ifstream cin;
 	cin.open("input.txt");*/
 
-	int n, sum, res = 0;
-	scanf("%d", &n);
-	for (int i = n / 2; i > 0; i--) {
-		sum = 0;
-		for (int j = i; sum < n + 1; j++) {
-			sum += j;
-			if (sum == n) {
-				res++;
-				for (int k = i; k < j; k++) printf("%d + ", k);
-				printf("%d = %d\n", j, n);
-				break;
-			}
-		}
-	}
+	int n, cnt = 2, plus, n_sub, res = 0;
 
-	printf("%d", res);
+	scanf("%d", &n);
+
+	while (true) {
+
+		n_sub = n;
+		for (int i = cnt; i > 0; i--) n_sub -= i;
+		
+		if (n_sub < 0) break;
+
+		if (n_sub % cnt == 0) {
+			plus = n_sub / cnt;
+			res++;
+			for (int i = 1; i < cnt; i++) {
+				printf("%d + ", i + plus);
+			}
+			printf("%d = %d\n", cnt + plus, n);
+		}
+		cnt++;
+	}
 	
+	printf("%d", res);
+
 	return 0;
 }
 
