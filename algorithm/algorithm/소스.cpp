@@ -4,15 +4,15 @@
 #include<algorithm>
 
 using namespace std;
-int a[200000], pre, now, n, c;
+int n;
 
-int count(int mid) {
-	int cnt = 1;
+
+int count(int mid, int a[]) {
+	int cnt = 1, pre;
 	pre = a[0];
 
 	for (int i = 1; i < n; i++) {
-		now = a[i];
-		if (now - pre >= mid) {
+		if (a[i] - pre >= mid) {
 			pre = a[i];
 			cnt++;
 		}
@@ -21,12 +21,11 @@ int count(int mid) {
 }
 
 int main() {
-
-	int lt = 0, rt, mid, res;
+	int c, lt = 0, rt, mid, res;
 	scanf("%d %d", &n, &c);
+	int* a = new int[n + 1];
 	
 	for (int i = 0; i < n; i++) scanf("%d", &a[i]);
-
 	sort(a, a + n);
 	rt = a[n - 1];
 
@@ -34,7 +33,7 @@ int main() {
 
 		mid = (lt + rt) / 2;
 
-		if (count(mid) >= c) {
+		if (count(mid, a) >= c) {
 			res = mid;
 			lt = mid + 1;
 		}
@@ -43,6 +42,7 @@ int main() {
 		}
 	}
 	printf("%d", res);
+	delete[] a;
 	return 0;
 }
 
