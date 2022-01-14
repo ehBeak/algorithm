@@ -4,45 +4,32 @@
 #include<algorithm>
 
 using namespace std;
-int n;
-
-
-int count(int mid, int a[]) {
-	int cnt = 1, pre;
-	pre = a[0];
-
-	for (int i = 1; i < n; i++) {
-		if (a[i] - pre >= mid) {
-			pre = a[i];
-			cnt++;
-		}
-	}
-	return cnt;
-}
 
 int main() {
-	int c, lt = 0, rt, mid, res;
-	scanf("%d %d", &n, &c);
-	int* a = new int[n + 1];
 	
-	for (int i = 0; i < n; i++) scanf("%d", &a[i]);
-	sort(a, a + n);
-	rt = a[n - 1];
+	int n, k, cnt = 0, cnt_i = 0, chk = 0;
+	scanf("%d %d", &n, &k);
+	vector<int> a(n);
 
-	while (lt <= rt) {
-
-		mid = (lt + rt) / 2;
-
-		if (count(mid, a) >= c) {
-			res = mid;
-			lt = mid + 1;
+	while (cnt < n-1) {
+		if (chk == k - 1 && a[cnt_i] == 0) {
+			a[cnt_i] = 1;
+			chk = 0;
+			cnt++;
 		}
-		else {
-			rt = mid - 1;
+		if (a[cnt_i] == 0) {
+			chk++;
+		}
+		cnt_i++;
+		if (cnt_i == n) {
+			cnt_i = 0;
 		}
 	}
-	printf("%d", res);
-	delete[] a;
+
+	for (int i = 0; i < n; i++) {
+		if (a[i] == 0) printf("%d ", i + 1);
+	}
+
 	return 0;
 }
 
