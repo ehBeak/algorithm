@@ -7,28 +7,28 @@ using namespace std;
 
 int main() {
 	
-	int n, k, cnt = 0, cnt_i = 0, chk = 0;
+	int n, k, pos = 0, i, cnt = 0;
 	scanf("%d %d", &n, &k);
-	vector<int> a(n);
-
-	while (cnt < n-1) {
-		if (chk == k - 1 && a[cnt_i] == 0) {
-			a[cnt_i] = 1;
-			chk = 0;
-			cnt++;
+	vector<int> prince(n + 1);
+	while (1) {
+		for (i = 1; i <= k; i++) {
+			while (1) {
+				pos++;
+				if (pos > n) pos = 1;
+				if (prince[pos] == 0) break;
+			}
 		}
-		if (a[cnt_i] == 0) {
-			chk++;
-		}
-		cnt_i++;
-		if (cnt_i == n) {
-			cnt_i = 0;
+		prince[pos] = 1;
+		cnt++;
+		if (cnt == n - 1) break;
+	}
+	for (i = 1; i <= n; i++) {
+		if (prince[i] == 0) {
+			printf("%d\n", i);
+			break;
 		}
 	}
-
-	for (int i = 0; i < n; i++) {
-		if (a[i] == 0) printf("%d ", i + 1);
-	}
+	return 0;
 
 	return 0;
 }
