@@ -7,39 +7,27 @@ using namespace std;
 
 int main() {
 	
-	int n, k, sum = 0;
-	
+	int n, p, cnt = 0;
 	scanf("%d", &n);
-	vector<int> works(n);
-	for (int i = 0; i < n; i++)
-	{
-		scanf("%d", &works[i]);
-		sum += works[i];
-	}
-	scanf("%d", &k);
-
-	if (k >= sum) {
-		printf("%d", -1);
-		return 0;
-	}
-
-	int j = -1;
-	while (true) {
-		j++;
-		if (j == n) j = 0;
-		if (works[j] == 0) continue;
-
-		works[j]--;
-		
-		if (k == 0) {
-			printf("%d", j + 1);
-			break;
+	vector<vector<int>> map(n + 2, vector<int>(n + 2));
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			scanf("%d", &map[i][j]);
 		}
-		else {
-			k--;
-		}
-
 	}
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			p = map[i][j];
+			if (p > map[i - 1][j] && p > map[i + 1][j]
+				&& p > map[i][j - 1] && p > map[i][j + 1]) {
+				cnt++;
+				j++;
+			}
+		}
+	}
+	
+	printf("%d", cnt);
 
 	return 0;
 }
