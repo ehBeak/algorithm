@@ -7,28 +7,39 @@ using namespace std;
 
 int main() {
 	
-	int n, k, pos = 0, i, cnt = 0;
-	scanf("%d %d", &n, &k);
-	vector<int> prince(n + 1);
-	while (1) {
-		for (i = 1; i <= k; i++) {
-			while (1) {
-				pos++;
-				if (pos > n) pos = 1;
-				if (prince[pos] == 0) break;
-			}
-		}
-		prince[pos] = 1;
-		cnt++;
-		if (cnt == n - 1) break;
+	int n, k, sum = 0;
+	
+	scanf("%d", &n);
+	vector<int> works(n);
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%d", &works[i]);
+		sum += works[i];
 	}
-	for (i = 1; i <= n; i++) {
-		if (prince[i] == 0) {
-			printf("%d\n", i);
+	scanf("%d", &k);
+
+	if (k >= sum) {
+		printf("%d", -1);
+		return 0;
+	}
+
+	int j = -1;
+	while (true) {
+		j++;
+		if (j == n) j = 0;
+		if (works[j] == 0) continue;
+
+		works[j]--;
+		
+		if (k == 0) {
+			printf("%d", j + 1);
 			break;
 		}
+		else {
+			k--;
+		}
+
 	}
-	return 0;
 
 	return 0;
 }
