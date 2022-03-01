@@ -2,32 +2,33 @@
 #include<stdio.h>
 #include<vector>
 #include<algorithm>
+#include<math.h>
 
 using namespace std;
 
 int main() {
 	
-	int n, p, cnt = 0;
-	scanf("%d", &n);
-	vector<vector<int>> map(n + 2, vector<int>(n + 2));
-	for (int i = 1; i <= n; i++) {
-		for (int j = 1; j <= n; j++) {
-			scanf("%d", &map[i][j]);
-		}
-	}
+	int arr[9][9];
 
-	for (int i = 1; i <= n; i++) {
-		for (int j = 1; j <= n; j++) {
-			p = map[i][j];
-			if (p > map[i - 1][j] && p > map[i + 1][j]
-				&& p > map[i][j - 1] && p > map[i][j + 1]) {
-				cnt++;
-				j++;
+	int sum = 0, avg, res, min;
+
+	for (int i = 0; i < 9; i++) {
+		sum = 0;
+		for (int j = 0; j < 9; j++) {
+			scanf("%d", &arr[i][j]);
+			sum += arr[i][j];
+		}
+		avg = (sum / 9.0) + 0.5;
+		min = 100;
+
+		for (int j = 0; j < 9; j++) {
+			if (abs(avg - arr[i][j]) < min) {
+				min = abs(avg - arr[i][j]);
+				res = arr[i][j];
 			}
 		}
+		printf("%d %d\n", avg, res);
 	}
-	
-	printf("%d", cnt);
 
 	return 0;
 }
