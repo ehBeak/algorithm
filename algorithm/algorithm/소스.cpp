@@ -8,28 +8,44 @@ using namespace std;
 
 int main() {
 	
-	int arr[9][9];
+	int n, cnt = -1, idx = 0, sum = 0;
+	scanf("%d", &n);
+	
+	vector<vector<bool>> arr(n, vector<bool>(n, false));
+	vector<int> front(n);
+	vector<int> side(n);
 
-	int sum = 0, avg, res, min;
-
-	for (int i = 0; i < 9; i++) {
-		sum = 0;
-		for (int j = 0; j < 9; j++) {
-			scanf("%d", &arr[i][j]);
-			sum += arr[i][j];
-		}
-		avg = (sum / 9.0) + 0.5;
-		min = 100;
-
-		for (int j = 0; j < 9; j++) {
-			if (abs(avg - arr[i][j]) < min) {
-				min = abs(avg - arr[i][j]);
-				res = arr[i][j];
+	for (int i = 0; i < n; i++) scanf("%d", &front[i]);
+	for (int i = 0; i < n; i++) scanf("%d", &side[i]);
+	
+	while (cnt < 10) {
+		cnt++;
+		for (int i = 0; i < n; i++) {
+			if (front[i] == cnt) {
+				for (int j = 0; j < n; j++) {
+					if (arr[j][i] == false) {
+						arr[j][i] = true;
+						sum += cnt;
+					}
+				}
 			}
 		}
-		printf("%d %d\n", avg, res);
+		
+		for (int i = 0; i < n; i++) {
+			if (side[i] == cnt) {
+				for (int j = 0; j < n; j++) {
+					if (arr[i][j] == false) {
+						arr[i][j] = true;
+						sum += cnt;
+					}
+				}
+			}
+		}
+		
 	}
 
+
+	printf("%d", sum);
 	return 0;
 }
 
