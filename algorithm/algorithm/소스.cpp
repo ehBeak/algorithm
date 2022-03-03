@@ -8,44 +8,35 @@ using namespace std;
 
 int main() {
 	
-	int n, cnt = -1, idx = 0, sum = 0;
-	scanf("%d", &n);
-	
-	vector<vector<bool>> arr(n, vector<bool>(n, false));
-	vector<int> front(n);
-	vector<int> side(n);
+	int H, W, h, w, sum = 0, res = 0;
+	scanf("%d %d", &H, &W);
 
-	for (int i = 0; i < n; i++) scanf("%d", &front[i]);
-	for (int i = 0; i < n; i++) scanf("%d", &side[i]);
-	
-	while (cnt < 10) {
-		cnt++;
-		for (int i = 0; i < n; i++) {
-			if (front[i] == cnt) {
-				for (int j = 0; j < n; j++) {
-					if (arr[j][i] == false) {
-						arr[j][i] = true;
-						sum += cnt;
-					}
-				}
-			}
+	vector<vector<int>> arr(H, vector<int>(W));
+
+	for (int i = 0; i < H; i++) {
+		for (int j = 0; j < W; j++) {
+			scanf("%d", &arr[i][j]);
 		}
-		
-		for (int i = 0; i < n; i++) {
-			if (side[i] == cnt) {
-				for (int j = 0; j < n; j++) {
-					if (arr[i][j] == false) {
-						arr[i][j] = true;
-						sum += cnt;
-					}
-				}
-			}
-		}
-		
 	}
 
+	scanf("%d %d", &h, &w);
 
-	printf("%d", sum);
+	for (int i = 0; i < H-h+1; i++) {
+		for (int j = 0; j < W-w+1; j++) {
+
+			for (int x = j; x < w+j; x++) {
+				for (int y = i; y < h+i; y++) {
+					sum += arr[y][x];
+				}
+			}
+			if (sum > res)res = sum;
+			sum = 0;
+			
+		}
+	 }
+	
+	printf("%d", res);
+
 	return 0;
 }
 
