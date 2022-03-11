@@ -7,35 +7,28 @@
 using namespace std;
 
 int main() {
-	
-	int H, W, h, w, sum = 0, res = 0;
-	scanf("%d %d", &H, &W);
 
-	vector<vector<int>> arr(H+1, vector<int>(W+1));
-	vector<vector<int>> dy(H+1, vector<int>(W+1));
+	int n, p2, p3, p5, min = 214700000;
+	scanf("%d", &n);
+	vector<int> a(n, 1);
 
-	for (int i = 1; i <= H; i++) {
-		for (int j = 1; j <= W; j++) {
-			scanf("%d", &arr[i][j]);
-		}
-	}
-	scanf("%d %d", &h, &w);
+	p2 = p3 = p5 = 0;
+	for (int i = 1; i < n; i++) {
 
-	
-	for (int i = 1; i <= H; i++) {
-		for (int j = 1; j <= W; j++) {
-			dy[i][j] = arr[i][j] + dy[i][j - 1] + dy[i - 1][j] - dy[i - 1][j - 1];
-		}
-	}
 
-	for (int i = h; i <= H; i++) {
-		for (int j = w; j <= W; j++) {
-			sum = dy[i][j] - dy[i][j - w] - dy[i - h][j] + dy[i - h][j - w];
-			if (res < sum)res = sum;
-		}
+		if (a[p2] * 2 < a[p3] * 3) min = a[p2] * 2;
+		else min = a[p3] * 3;
+		if (a[p5] * 5 < min)min = a[p5] * 5;
+
+
+		if (a[p2] * 2 == min) p2++;
+		if (a[p3] * 3 == min) p3++;
+		if (a[p5] * 5 == min) p5++;
+
+		a[i] = min;
 	}
 
-	printf("%d", res);
+	printf("%d", a[n-1]);
 
 	return 0;
 }
