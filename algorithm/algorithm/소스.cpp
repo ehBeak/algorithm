@@ -3,35 +3,35 @@
 #include<vector>
 #include<algorithm>
 #include<math.h>
+#include<stack>
 
 using namespace std;
 
-int top = -1;
-int stack[100];
-
-void push(int e) {
-	stack[++top] = e;
-}
-
-int pop() {
-	return stack[top--];
-}
-
 int main() {
+	char str[30];
+	stack<char> stack;
+	int i = -1, flag = 1;
+	char tmp;
 	
-	int n, k;
-	scanf("%d %d", &n, &k);
-	char str[20] = "0123456789ABCDEF";
+	gets_s(str);
 
-	while (n != 0) {
-		push(n % k);
-		n /= k;
+	if (str[0] == ')') {
+		printf("NO"); return 0;
 	}
 
-	while (top != -1) {
-		printf("%c", str[pop()]);
+	for (int i = 0; str[i] != '\0'; i++) {
+		if (str[i] == '(') stack.push(str[i]);
+		else {
+			if (stack.empty()) {
+				flag = 0;
+				break;
+			}
+			stack.pop();
+		}
 	}
 
+	if (stack.empty() && flag==1) printf("YES");
+	else printf("NO");
 	return 0;
 }
 
